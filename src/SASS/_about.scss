@@ -1,0 +1,23 @@
+.about{
+    color: white;
+
+    h2{
+        margin-bottom: 1rem;
+    }
+
+    p{
+        font-size: 1.8rem;
+        margin: 0 auto;
+    }
+
+    p + p{
+        font-size: 1.4rem;
+        margin-top: 3rem;
+        text-align: left;
+    }
+
+    a{
+        color: $primary-color;
+        font-size: 1.8rem;
+    }
+}
