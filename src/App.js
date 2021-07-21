@@ -7,9 +7,10 @@ function App() {
 
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState({})
 
   const fetchData = (channel) => {
+    let requestedUser = {}
     // Check that a channel was entered before clicking the search button, if one wasn't, display an error
     if(!channel){
 
@@ -47,12 +48,16 @@ function App() {
         .then(res => res.json())
         .then(resJSON => {
           const data = resJSON.data[0]
-          const requestedUser = {
-            'username': data.display_name,
-            'id': data.id,
-            'profileImg': data.profile_image_url,
-            'partnerStatus': data.broadcaster_type
-          }
+          // requestedUser = {
+          //   'username': data.display_name,
+          //   'id': data.id,
+          //   'profileImg': data.profile_image_url,
+          //   'partnerStatus': data.broadcaster_type
+          // }
+          requestedUser.username = data.display_name
+          requestedUser.id = data.id
+          requestedUser.profileImg = data.profile_image_url
+          requestedUser.partnerStatus = data.broadcaster_type
           /*
             This response should give us:
             - The display name
@@ -117,17 +122,31 @@ function App() {
               }
 
               requestedUser.emotes = emotesList
+
             })
 
           }
-
-          console.log(requestedUser) 
 
         })
 
       })
     }
+
+    return requestedUser
+
   }
+
+  const onClick = async (channel) => {
+    const userData = await fetchData(channel)
+    console.log('Here is the user data')
+    console.log(userData)
+
+    setUser({userData})
+    console.log('Here is the user state ')
+    console.log(user)
+  }
+
+  
 
   return (
     <>
@@ -137,10 +156,9 @@ function App() {
             <label htmlFor="channelName">Channel Name</label>
             <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
           </div>
-          <button onClick={() => fetchData(channel)}>Search</button>
+          <button onClick={() => onClick(channel)}>Search</button>
         </section>
 
-        <Result errMsg={errMsg}/>
 
         <section className="about">
           <h2>What is Stats4You?</h2>
