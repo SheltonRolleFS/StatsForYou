@@ -7,10 +7,18 @@ function App() {
 
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
-  const [user, setUser] = useState({})
+  const [username, setUsername] = useState('')
+  const [userId, setUserId] = useState()
+  const [profileImg, setProfileImg] = useState('')
+  const [partnerStatus, setPartnerStatus] = useState(false)
+  const [liveStatus, setLiveStatus] = useState(false)
+  const [title, setTitle] = useState('')
+  const [game, setGame] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [emotes, setEmotes] = useState([])
+
 
   const fetchData = (channel) => {
-    let requestedUser = {}
     // Check that a channel was entered before clicking the search button, if one wasn't, display an error
     if(!channel){
 
@@ -48,16 +56,11 @@ function App() {
         .then(res => res.json())
         .then(resJSON => {
           const data = resJSON.data[0]
-          // requestedUser = {
-          //   'username': data.display_name,
-          //   'id': data.id,
-          //   'profileImg': data.profile_image_url,
-          //   'partnerStatus': data.broadcaster_type
-          // }
-          requestedUser.username = data.display_name
-          requestedUser.id = data.id
-          requestedUser.profileImg = data.profile_image_url
-          requestedUser.partnerStatus = data.broadcaster_type
+          setUsername(data.display_name)
+          setUserId(data.id) 
+          setProfileImg(data.profile_image_url)
+          setPartnerStatus(data.broadcaster_type)
+
           /*
             This response should give us:
             - The display name
@@ -69,31 +72,31 @@ function App() {
           // Check that the username that the user entered actually exists, if not, display an error
           if(resJSON.data.length <= 0){
             // If the username does exist, an array will be returned with its information, so if the array returned is empty then the username does not exist
-            setUser(errMsg)
+            // setUser(errMsg)
 
-            const entry = document.querySelector('#channelName')
-            entry.value = ''
+            // const entry = document.querySelector('#channelName')
+            // entry.value = ''
           }else{
             // If the username does exist, gather the rest of the channel information ( The live status and the list of custom emotes )
 
 
             // Run a fetch to get the users livestream status
-            fetch(`https://api.twitch.tv/helix/search/channels?query=${requestedUser.username}`, opts)
+            fetch(`https://api.twitch.tv/helix/search/channels?query=${data.display_name}`, opts)
             .then(res => res.json())
             .then(resJSON => {
               // This response gives us an array container 20 channels that match the channel name given, using the ID gathered in the previous fetch, loop through each array item and compare id's to find the channel we are looking for
               for(let i = 0; i < resJSON.data.length; i++){
                 let streamer = resJSON.data[i]
-                if(streamer.id === requestedUser.id){
+                if(streamer.id === data.id){
 
                   // If the id matches, add the needed information to the requestedUser object above
                   if(streamer.is_live){
-                    requestedUser.is_live = true
-                    requestedUser.title = streamer.title
-                    requestedUser.game = streamer.game_name
-                    requestedUser.startTime = streamer.started_at
+                    setLiveStatus(true)
+                    setTitle(streamer.title)
+                    setGame(streamer.game_name)
+                    setStartTime(streamer.started_at)
                   }else{
-                    requestedUser.is_live = false
+                    setLiveStatus(false)
                   }
 
                 }
@@ -102,7 +105,7 @@ function App() {
             })
 
             // Run a fetch to get a list of the users custom emotes
-            fetch(`https://api.twitch.tv/helix/chat/emotes?broadcaster_id=${requestedUser.id}`, opts)
+            fetch(`https://api.twitch.tv/helix/chat/emotes?broadcaster_id=${data.id}`, opts)
             .then(res => res.json())
             .then(resJSON => {
               // This response gives us an array container the name and an image of all the custom emotes for the searched channel
@@ -112,16 +115,18 @@ function App() {
               
               for(let i = 0; i < resJSON.data.length; i++){
                 let currentEmote = resJSON.data[i]
+                const id = Math.floor(Math.random() * 10000) + 1
 
                 let emote = {
                   'name': currentEmote.name,
-                  'emoteImg': currentEmote.images.url_4x
+                  'emoteImg': currentEmote.images.url_4x,
+                  'id': id
                 }
 
                 emotesList.push(emote)
               }
 
-              requestedUser.emotes = emotesList
+              setEmotes(emotesList)
 
             })
 
@@ -132,21 +137,7 @@ function App() {
       })
     }
 
-    return requestedUser
-
   }
-
-  const onClick = async (channel) => {
-    const userData = await fetchData(channel)
-    console.log('Here is the user data')
-    console.log(userData)
-
-    setUser({userData})
-    console.log('Here is the user state ')
-    console.log(user)
-  }
-
-  
 
   return (
     <>
@@ -156,10 +147,12 @@ function App() {
             <label htmlFor="channelName">Channel Name</label>
             <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
           </div>
-          <button onClick={() => onClick(channel)}>Search</button>
+          <button onClick={() => fetchData(channel)}>Search</button>
         </section>
 
-
+        {/* Check if a user was searched for and only display the results section if one was */}
+        {username !== '' ? <Result name={username} id={userId} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} startTime={startTime} emotes={emotes}/> : ''}
+        
         <section className="about">
           <h2>What is Stats4You?</h2>
           <p>
