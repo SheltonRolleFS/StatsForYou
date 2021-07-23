@@ -8,7 +8,6 @@ function App() {
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
   const [username, setUsername] = useState('')
-  const [userId, setUserId] = useState()
   const [profileImg, setProfileImg] = useState('')
   const [partnerStatus, setPartnerStatus] = useState(false)
   const [liveStatus, setLiveStatus] = useState(false)
@@ -55,12 +54,6 @@ function App() {
         fetch(`https://api.twitch.tv/helix/users?login=${channel}`, opts)
         .then(res => res.json())
         .then(resJSON => {
-          const data = resJSON.data[0]
-          setUsername(data.display_name)
-          setUserId(data.id) 
-          setProfileImg(data.profile_image_url)
-          setPartnerStatus(data.broadcaster_type)
-
           /*
             This response should give us:
             - The display name
@@ -72,11 +65,15 @@ function App() {
           // Check that the username that the user entered actually exists, if not, display an error
           if(resJSON.data.length <= 0){
             // If the username does exist, an array will be returned with its information, so if the array returned is empty then the username does not exist
-            // setUser(errMsg)
+            setUsername(errMsg)
 
-            // const entry = document.querySelector('#channelName')
-            // entry.value = ''
+            const entry = document.querySelector('#channelName')
+            entry.value = ''
           }else{
+            const data = resJSON.data[0]
+            setUsername(data.display_name)
+            setProfileImg(data.profile_image_url)
+            setPartnerStatus(data.broadcaster_type)
             // If the username does exist, gather the rest of the channel information ( The live status and the list of custom emotes )
 
 
@@ -147,11 +144,11 @@ function App() {
             <label htmlFor="channelName">Channel Name</label>
             <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
           </div>
-          <button onClick={() => fetchData(channel)}>Search</button>
+          <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
         </section>
 
         {/* Check if a user was searched for and only display the results section if one was */}
-        {username !== '' ? <Result name={username} id={userId} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} startTime={startTime} emotes={emotes}/> : ''}
+        {username !== '' ? <Result name={username} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} startTime={startTime} emotes={emotes} errMsg={errMsg}/> : ''}
         
         <section className="about">
           <h2>What is Stats4You?</h2>

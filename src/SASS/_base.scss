@@ -31,3 +31,10 @@ h6{
     max-width: 100rem;
     margin: 0 auto;
 }
+
+// Media Queries
+@media (max-width: 1000px){
+    .container{
+        padding: 0 3rem;
+    }
+}

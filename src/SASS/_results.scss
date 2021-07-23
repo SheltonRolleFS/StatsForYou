@@ -35,6 +35,8 @@
 
     &__live-status{
         grid-column: 1 / 2;
+        animation-name: slide-up;
+        animation-duration: .7s;
 
         .live-card{
             display: grid;
@@ -82,6 +84,12 @@
                 transform: scale(1.04);
             }
         }
+
+        p{
+            font-size: 2rem;
+            color: white;
+            font-weight: normal;
+        }
     }
 
     &__emotes{
@@ -89,6 +97,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         row-gap: 2rem;
+        animation-name: slide-up;
+        animation-duration: .5s;
         
         .emotes-container{
             text-align: center;
@@ -100,12 +110,56 @@
 
         }
 
+        p{
+            grid-column: 1 / 5;
+            font-size: 2rem;
+            color: white;
+            font-weight: normal;
+            text-align: center;
+        }
+
     }
 
     &__err-msg{
         color: white;
         font-size: 2.5rem;
+        grid-column: 1 / 3;
         text-align: center;
         text-decoration: underline;
+        animation-name: fade-in;
+        animation-duration: 500ms;
+    }
+}
+
+// Media Queries
+@media (max-width: 798px){
+    .results{
+        grid-template-columns: 1fr;
+
+        &__live-status{
+            width: 50rem;
+            margin: 0 auto 3rem;
+        }
+
+        &__emotes{
+            grid-column: 1 / 2;
+        }
+    }
+}
+
+// Key Frames
+@keyframes fade-in{
+    from {opacity: 0;}
+    to {opacity: 100%;}
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 100%;
     }
 }
