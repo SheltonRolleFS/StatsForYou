@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/StatsForYou/static/css/main.691004ef.chunk.css",
+    "main.js": "/StatsForYou/static/js/main.f9849ad9.chunk.js",
+    "main.js.map": "/StatsForYou/static/js/main.f9849ad9.chunk.js.map",
+    "runtime-main.js": "/StatsForYou/static/js/runtime-main.8a0324eb.js",
+    "runtime-main.js.map": "/StatsForYou/static/js/runtime-main.8a0324eb.js.map",
+    "static/js/2.db6c6489.chunk.js": "/StatsForYou/static/js/2.db6c6489.chunk.js",
+    "static/js/2.db6c6489.chunk.js.map": "/StatsForYou/static/js/2.db6c6489.chunk.js.map",
+    "static/js/3.136c885f.chunk.js": "/StatsForYou/static/js/3.136c885f.chunk.js",
+    "static/js/3.136c885f.chunk.js.map": "/StatsForYou/static/js/3.136c885f.chunk.js.map",
+    "index.html": "/StatsForYou/index.html",
+    "static/css/main.691004ef.chunk.css.map": "/StatsForYou/static/css/main.691004ef.chunk.css.map",
+    "static/js/2.db6c6489.chunk.js.LICENSE.txt": "/StatsForYou/static/js/2.db6c6489.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8a0324eb.js",
+    "static/js/2.db6c6489.chunk.js",
+    "static/css/main.691004ef.chunk.css",
+    "static/js/main.f9849ad9.chunk.js"
+  ]
+}
