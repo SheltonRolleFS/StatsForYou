@@ -1,7 +1,7 @@
 import React from 'react'
 import partnerBadge from '../assets/partner-badge.png'
 
-const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, startTime, emotes, errMsg }) => {
+const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emotes, errMsg }) => {
     
     if(name === errMsg){
         return (
@@ -28,7 +28,6 @@ const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, star
                     <div className="live-card">
                         <h2>{title}</h2>
                         <p>{game}</p>
-                        <p>{startTime}</p>
                         <a target="_blank" href={streamlink}>Watch Now</a>
                     </div>
 
