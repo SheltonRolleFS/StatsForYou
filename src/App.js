@@ -13,7 +13,6 @@ function App() {
   const [liveStatus, setLiveStatus] = useState(false)
   const [title, setTitle] = useState('')
   const [game, setGame] = useState('')
-  const [startTime, setStartTime] = useState('')
   const [emotes, setEmotes] = useState([])
 
 
@@ -91,7 +90,6 @@ function App() {
                     setLiveStatus(true)
                     setTitle(streamer.title)
                     setGame(streamer.game_name)
-                    setStartTime(streamer.started_at)
                   }else{
                     setLiveStatus(false)
                   }
@@ -148,7 +146,7 @@ function App() {
         </section>
 
         {/* Check if a user was searched for and only display the results section if one was */}
-        {username !== '' ? <Result name={username} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} startTime={startTime} emotes={emotes} errMsg={errMsg}/> : ''}
+        {username !== '' ? <Result name={username} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
         
         <section className="about">
           <h2>What is Stats4You?</h2>
