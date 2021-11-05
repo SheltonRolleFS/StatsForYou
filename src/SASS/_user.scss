@@ -42,6 +42,11 @@
       }
     }
 
+    // Style the loading animation
+    #loading-anim {
+      text-align: center;
+    }
+
     .results {
       &__err-msg {
         color: rgb(167, 163, 163);
