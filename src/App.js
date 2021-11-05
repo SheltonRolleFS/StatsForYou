@@ -8,7 +8,9 @@ function App() {
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
   const [username, setUsername] = useState('')
+  const [description, setDescription] = useState('')
   const [profileImg, setProfileImg] = useState('')
+  const [offlineImg, setOfflineImg] = useState('')
   const [partnerStatus, setPartnerStatus] = useState(false)
   const [liveStatus, setLiveStatus] = useState(false)
   const [title, setTitle] = useState('')
@@ -16,7 +18,7 @@ function App() {
   const [emotes, setEmotes] = useState([])
 
 
-  const fetchData = (channel) => {
+  const fetchData = async (channel) => {
     // Check that a channel was entered before clicking the search button, if one wasn't, display an error
     if(!channel){
 
@@ -25,7 +27,7 @@ function App() {
     }else{
       // Run a fetch to get an oauth token to access the API with
       const oauthURL = 'https://id.twitch.tv/oauth2/token?client_id=chgdyewi4tcvg7mp34uoxrjq9t6h9m&client_secret=iiy9ht38arnuh5ywfbhltmd36c8cs7&grant_type=client_credentials'
-      fetch(oauthURL, {method: 'POST'})
+      await fetch(oauthURL, {method: 'POST'})
       .then(res => res.json())
       .then(data => {
         const token = data.access_token
@@ -71,7 +73,9 @@ function App() {
           }else{
             const data = resJSON.data[0]
             setUsername(data.display_name)
+            setDescription(data.description)
             setProfileImg(data.profile_image_url)
+            setOfflineImg(data.offline_image_url)
             setPartnerStatus(data.broadcaster_type)
             // If the username does exist, gather the rest of the channel information ( The live status and the list of custom emotes )
 
@@ -132,34 +136,48 @@ function App() {
       })
     }
 
+    // Set the search input back to be empty
+    const search = document.querySelector('#channelName');
+    search.value = '';
+
   }
 
   return (
     <>
-      <div className="container">
-        <section className="user-input">
-          <div className="user-input__entry">
-            <label htmlFor="channelName">Channel Name</label>
-            <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
+      <div id="top" className="intro">
+        <div className="overlay">
+          <div className="container">
+            <header>
+              <nav>
+                <a href="https://dev.twitch.tv/docs/" target="_blank">TwitchAPI Documentation</a>
+              </nav>
+            </header>
+            <section className="about">
+              <h1>StatsForYou</h1>
+              <p>
+                  StatsForYou is a website made to provide you information on your 
+                  favorite Twitch streamers. Using the TwitchAPI, and the username of a 
+                  streamer of your choosing, we gather relative information such as whether
+                  the streamer is currently live, information on their stream if they are 
+                  live, and a list of all of their emotes. 
+              </p>
+            </section>
           </div>
-          <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
-        </section>
-
-        {/* Check if a user was searched for and only display the results section if one was */}
-        {username !== '' ? <Result name={username} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
-        
-        <section className="about">
-          <h2>What is Stats4You?</h2>
-          <p>
-              Stats4You is a website made to provide you information on your 
-              favorite Twitch streamers. Using the TwitchAPI, and the username of a 
-              streamer of your choosing, we gather relative information such as whether
-              the streamer is currently live, information on their stream if they are 
-              live, and a list of all of their emotes. 
-          </p>
-          <p>You can check out the Twitch API documentation <a href="https://dev.twitch.tv/docs/api/" target="_blank" rel="noreferrer">HERE</a></p>
-        </section>
+        </div>
       </div>
+
+      <section id="user">
+        <div className="container">
+          <section className="user-input">
+            <label htmlFor="channelName">Channel Name</label>
+            <input type="text" id="channelName" placeholder="eg. SONII" onChange={(evt) => setChannel(evt.target.value)}/>
+            <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
+          </section>
+
+          {/* Check if a user was searched for and only display the results section if one was */}
+          {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
+        </div>
+      </section>
     </>
   );
 }

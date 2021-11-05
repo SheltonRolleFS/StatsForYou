@@ -1,0 +1,189 @@
+#user {
+  padding: 7rem 0;
+
+  .container {
+    .user-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 6rem;
+
+      label {
+        display: none;
+      }
+
+      input {
+        width: 40%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        font-size: 2rem;
+        padding: 0.5rem;
+        outline: none;
+        color: white;
+      }
+
+      input::placeholder {
+        font-size: 2rem;
+        color: $non-active;
+      }
+
+      button {
+        margin-left: 3rem;
+        font-size: 2rem;
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        text-transform: uppercase;
+        color: white;
+        background: transparent;
+        transition: all 200ms ease-in;
+        cursor: pointer;
+      }
+    }
+
+    .results {
+      &__err-msg {
+        color: rgb(167, 163, 163);
+        text-align: center;
+        font-size: 2.5rem;
+        margin: 4rem;
+        font-weight: bold;
+        font-style: italic;
+        grid-column: 1 / 3;
+      }
+
+      &__header {
+        grid-column: 1 / 3;
+        display: flex;
+        align-items: center;
+
+        img {
+          border-radius: 100%;
+          width: 100px;
+          height: 100px;
+          margin-right: 1.5rem;
+        }
+
+        #info {
+          color: white;
+
+          .name {
+            display: flex;
+            align-items: center;
+
+            h1 {
+              font-size: 4rem;
+              margin-right: 1rem;
+            }
+
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+
+          p {
+            font-size: 1.8rem;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+
+      &__live-status {
+        margin: 4rem auto;
+
+        h3 {
+          font-size: 3rem;
+          font-style: italic;
+          color: rgb(210, 46, 46);
+          margin-bottom: 2rem;
+        }
+
+        // Style the offline result
+        .offline-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+
+          img {
+            width: 70%;
+          }
+
+          p {
+            color: white;
+            font-size: 2.5rem;
+            margin-top: 1.2rem;
+          }
+        }
+
+        // Style the online results
+        .live-card {
+          background-color: rgba(255, 255, 255, 0.057);
+          padding: 3rem;
+          border-radius: 1.5rem;
+
+          h2 {
+            color: white;
+            font-size: 4rem;
+          }
+
+          p {
+            font-size: 1.6rem;
+            color: rgb(203, 203, 203);
+            margin-bottom: 3rem;
+          }
+
+          a {
+            padding: 1rem 1.5rem;
+            font-size: 1.6rem;
+            text-align: right;
+            text-decoration: none;
+            color: white;
+            background-color: rgb(235, 49, 49);
+            border: 1px solid rgb(235, 49, 49);
+            border-radius: 0.8rem;
+            transition: all 250ms ease-in-out;
+          }
+
+          a:hover {
+            background-color: rgb(233, 19, 19);
+            border: 1px solid rgb(233, 19, 19);
+          }
+        }
+      }
+
+      &__emotes {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+
+        h3 {
+          font-size: 3rem;
+          font-style: italic;
+          color: rgb(210, 46, 46);
+          margin-bottom: 2rem;
+          grid-column: span 4;
+        }
+
+        .emotes-container {
+          background-color: rgba(255, 255, 255, 0.057);
+          padding: 0.5rem 1.5rem;
+          border-radius: 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: 1.6rem;
+            color: white;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import partnerBadge from '../assets/partner-badge.png'
 
-const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emotes, errMsg }) => {
+const Result = ({ name, description, profileImg, offlineImg, partnerStatus, liveStatus, title, game, emotes, errMsg }) => {
     
     if(name === errMsg){
         return (
@@ -16,25 +16,33 @@ const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emot
             <section className="results">
                 <header className="results__header">
                     <img src={profileImg} alt="profile" />
-                    <div className="name">
-                        <h1>{name}</h1>
-                        {partnerStatus === 'partner' ? <img src={partnerBadge} alt="partner-badge." id="partner-badge"/> : ''}
+                    <div id="info">
+                        <div className="name">
+                            <h1>{name}</h1>
+                            {partnerStatus === 'partner' ? <img src={partnerBadge} alt="partner-badge." id="partner-badge"/> : ''}
+                        </div>
+                        <p>{description}</p>
                     </div>
                 </header>
 
                 <section className="results__live-status">
-                    {liveStatus === true ? 
-
+                    <h3>Live Status</h3>
+                    {liveStatus === true
+                        ?
                     <div className="live-card">
                         <h2>{title}</h2>
-                        <p>{game}</p>
-                        <a target="_blank" href={streamlink}>Watch Now</a>
+                        <p>{`${name} is currently playing ${game}`}</p>
+                        <a target="_blank" href={streamlink} rel="noreferrer">Watch Now</a>
                     </div>
-
-                    : <p>{name} is currently offline!</p>}
+                        :
+                    <div className="offline-card">
+                        <img src={offlineImg} alt="offline banner" />
+                        <p>{name} is currently offline!</p>
+                    </div>}
                 </section>
 
                 <section className="results__emotes">
+                    <h3>Channel Emotes</h3>
                     {emotes.length > 0 ? 
                     
                     emotes.map(emote => {
