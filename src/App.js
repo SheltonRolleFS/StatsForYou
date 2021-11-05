@@ -142,30 +142,38 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <section className="user-input">
-          <div className="user-input__entry">
-            <label htmlFor="channelName">Channel Name</label>
-            <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
+      <div className="intro">
+        <div className="overlay">
+          <div className="container">
+            <header>
+              <nav>
+                <a href="https://dev.twitch.tv/docs/" target="_blank">TwitchAPI Documentation</a>
+              </nav>
+            </header>
+            <section className="about">
+              <h1>StatsForYou</h1>
+              <p>
+                  StatsForYou is a website made to provide you information on your 
+                  favorite Twitch streamers. Using the TwitchAPI, and the username of a 
+                  streamer of your choosing, we gather relative information such as whether
+                  the streamer is currently live, information on their stream if they are 
+                  live, and a list of all of their emotes. 
+              </p>
+            </section>
           </div>
-          <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
-        </section>
-
-        {/* Check if a user was searched for and only display the results section if one was */}
-        {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
-        
-        <section className="about">
-          <h2>What is Stats4You?</h2>
-          <p>
-              Stats4You is a website made to provide you information on your 
-              favorite Twitch streamers. Using the TwitchAPI, and the username of a 
-              streamer of your choosing, we gather relative information such as whether
-              the streamer is currently live, information on their stream if they are 
-              live, and a list of all of their emotes. 
-          </p>
-          <p>You can check out the Twitch API documentation <a href="https://dev.twitch.tv/docs/api/" target="_blank" rel="noreferrer">HERE</a></p>
-        </section>
+        </div>
       </div>
+
+      <section className="user-input">
+        <div className="user-input__entry">
+          <label htmlFor="channelName">Channel Name</label>
+          <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
+        </div>
+        <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
+      </section>
+
+      {/* Check if a user was searched for and only display the results section if one was */}
+      {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
     </>
   );
 }

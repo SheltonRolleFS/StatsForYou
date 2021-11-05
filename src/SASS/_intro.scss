@@ -1,0 +1,48 @@
+.intro {
+  background: url("../assets/twitch-logo.jpeg") top center no-repeat;
+  position: relative;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.516);
+    padding: 2rem;
+
+    .container {
+      header {
+        text-align: right;
+        nav {
+          a {
+            color: $no-hover;
+            text-decoration: none;
+            border: 1px solid $no-hover;
+            padding: 0.5rem 1rem;
+            font-size: 1.6rem;
+            transition: all 200ms ease-in-out;
+          }
+
+          a:hover {
+            color: white;
+            border: 1px solid white;
+          }
+        }
+      }
+
+      .about {
+        margin: 7rem 0;
+
+        h1 {
+          font-size: 5rem;
+          color: white;
+          margin-bottom: 2.5rem;
+        }
+
+        p {
+          font-size: 2rem;
+          color: white;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
