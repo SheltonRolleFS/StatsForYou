@@ -1,7 +1,7 @@
 import React from 'react'
 import partnerBadge from '../assets/partner-badge.png'
 
-const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emotes, errMsg }) => {
+const Result = ({ name, description, profileImg, offlineImg, partnerStatus, liveStatus, title, game, emotes, errMsg }) => {
     
     if(name === errMsg){
         return (
@@ -20,6 +20,7 @@ const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emot
                         <h1>{name}</h1>
                         {partnerStatus === 'partner' ? <img src={partnerBadge} alt="partner-badge." id="partner-badge"/> : ''}
                     </div>
+                    <p>{description}</p>
                 </header>
 
                 <section className="results__live-status">
@@ -28,10 +29,14 @@ const Result = ({ name, profileImg, partnerStatus, liveStatus, title, game, emot
                     <div className="live-card">
                         <h2>{title}</h2>
                         <p>{game}</p>
-                        <a target="_blank" href={streamlink}>Watch Now</a>
+                        <a target="_blank" href={streamlink} rel="noreferrer">Watch Now</a>
                     </div>
 
-                    : <p>{name} is currently offline!</p>}
+                        :
+                        <div>
+                            <img src={offlineImg} alt="offline banner" />
+                            <p>{name} is currently offline!</p>
+                        </div>}
                 </section>
 
                 <section className="results__emotes">

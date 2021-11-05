@@ -8,7 +8,9 @@ function App() {
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
   const [username, setUsername] = useState('')
+  const [description, setDescription] = useState('')
   const [profileImg, setProfileImg] = useState('')
+  const [offlineImg, setOfflineImg] = useState('')
   const [partnerStatus, setPartnerStatus] = useState(false)
   const [liveStatus, setLiveStatus] = useState(false)
   const [title, setTitle] = useState('')
@@ -71,8 +73,12 @@ function App() {
           }else{
             const data = resJSON.data[0]
             setUsername(data.display_name)
+            setDescription(data.description)
             setProfileImg(data.profile_image_url)
+            setOfflineImg(data.offline_image_url)
             setPartnerStatus(data.broadcaster_type)
+
+            console.log(data);
             // If the username does exist, gather the rest of the channel information ( The live status and the list of custom emotes )
 
 
@@ -146,7 +152,7 @@ function App() {
         </section>
 
         {/* Check if a user was searched for and only display the results section if one was */}
-        {username !== '' ? <Result name={username} profileImg={profileImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
+        {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
         
         <section className="about">
           <h2>What is Stats4You?</h2>
