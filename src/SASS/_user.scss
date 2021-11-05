@@ -99,8 +99,9 @@
           color: rgb(210, 46, 46);
           margin-bottom: 2rem;
         }
+
         // Style the offline result
-        div {
+        .offline-card {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -114,6 +115,41 @@
             color: white;
             font-size: 2.5rem;
             margin-top: 1.2rem;
+          }
+        }
+
+        // Style the online results
+        .live-card {
+          background-color: rgba(255, 255, 255, 0.057);
+          padding: 3rem;
+          border-radius: 1.5rem;
+
+          h2 {
+            color: white;
+            font-size: 4rem;
+          }
+
+          p {
+            font-size: 1.6rem;
+            color: rgb(203, 203, 203);
+            margin-bottom: 3rem;
+          }
+
+          a {
+            padding: 1rem 1.5rem;
+            font-size: 1.6rem;
+            text-align: right;
+            text-decoration: none;
+            color: white;
+            background-color: rgb(235, 49, 49);
+            border: 1px solid rgb(235, 49, 49);
+            border-radius: 0.8rem;
+            transition: all 250ms ease-in-out;
+          }
+
+          a:hover {
+            background-color: rgb(233, 19, 19);
+            border: 1px solid rgb(233, 19, 19);
           }
         }
       }

@@ -31,11 +31,11 @@ const Result = ({ name, description, profileImg, offlineImg, partnerStatus, live
                         ?
                     <div className="live-card">
                         <h2>{title}</h2>
-                        <p>{game}</p>
+                        <p>{`${name} is currently playing ${game}`}</p>
                         <a target="_blank" href={streamlink} rel="noreferrer">Watch Now</a>
                     </div>
                         :
-                    <div>
+                    <div className="offline-card">
                         <img src={offlineImg} alt="offline banner" />
                         <p>{name} is currently offline!</p>
                     </div>}
