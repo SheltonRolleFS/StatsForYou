@@ -16,27 +16,28 @@ const Result = ({ name, description, profileImg, offlineImg, partnerStatus, live
             <section className="results">
                 <header className="results__header">
                     <img src={profileImg} alt="profile" />
-                    <div className="name">
-                        <h1>{name}</h1>
-                        {partnerStatus === 'partner' ? <img src={partnerBadge} alt="partner-badge." id="partner-badge"/> : ''}
+                    <div id="info">
+                        <div className="name">
+                            <h1>{name}</h1>
+                            {partnerStatus === 'partner' ? <img src={partnerBadge} alt="partner-badge." id="partner-badge"/> : ''}
+                        </div>
+                        <p>{description}</p>
                     </div>
-                    <p>{description}</p>
                 </header>
 
                 <section className="results__live-status">
-                    {liveStatus === true ? 
-
+                    {liveStatus === true
+                        ?
                     <div className="live-card">
                         <h2>{title}</h2>
                         <p>{game}</p>
                         <a target="_blank" href={streamlink} rel="noreferrer">Watch Now</a>
                     </div>
-
                         :
-                        <div>
-                            <img src={offlineImg} alt="offline banner" />
-                            <p>{name} is currently offline!</p>
-                        </div>}
+                    <div>
+                        <img src={offlineImg} alt="offline banner" />
+                        <p>{name} is currently offline!</p>
+                    </div>}
                 </section>
 
                 <section className="results__emotes">
