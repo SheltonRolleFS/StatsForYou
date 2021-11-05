@@ -1,9 +1,14 @@
 import { useState } from 'react'
 
+// React Spinner loading animation import
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 /* eslint-disable react/jsx-no-target-blank */
 import Result from './components/Results'
 
 function App() {
+  // Loadning animation state
+  const [loading, setLoading] = useState(false)
 
   const errMsg = 'There is no user with that username, please try again.'
   const [channel, setChannel] = useState('')
@@ -24,7 +29,12 @@ function App() {
 
       alert('Please enter a channel name before clicking search!')
 
-    }else{
+    } else {
+      // Set the loading animation state to true
+      setLoading(true)
+
+      // Set the username state to be empty
+      setUsername('')
       // Run a fetch to get an oauth token to access the API with
       const oauthURL = 'https://id.twitch.tv/oauth2/token?client_id=chgdyewi4tcvg7mp34uoxrjq9t6h9m&client_secret=iiy9ht38arnuh5ywfbhltmd36c8cs7&grant_type=client_credentials'
       await fetch(oauthURL, {method: 'POST'})
@@ -140,6 +150,9 @@ function App() {
     const search = document.querySelector('#channelName');
     search.value = '';
 
+    // Set the loading animation to false
+    setLoading(false)
+
   }
 
   return (
@@ -174,8 +187,9 @@ function App() {
             <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
           </section>
 
-          {/* Check if a user was searched for and only display the results section if one was */}
-          {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
+          {loading ? <div id="loading-anim"><ScaleLoader color="#36D7B7" loading={loading} height={35} width={5} radius={2} margin={2} /></div> : null }
+
+          {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : null}
         </div>
       </section>
     </>
