@@ -1,6 +1,4 @@
 #user {
-  background-color: #040348;
-  height: 100vh;
   padding: 7rem 0;
 
   .container {
@@ -8,6 +6,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 6rem;
 
       label {
         display: none;
@@ -44,11 +43,6 @@
     }
 
     .results {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 4rem;
-      row-gap: 4rem;
-
       &__err-msg {
         color: rgb(167, 163, 163);
         text-align: center;
@@ -90,13 +84,21 @@
           }
 
           p {
+            font-size: 1.8rem;
             margin-top: 0.5rem;
           }
         }
       }
 
       &__live-status {
-        grid-column: span 1;
+        margin: 4rem auto;
+
+        h3 {
+          font-size: 3rem;
+          font-style: italic;
+          color: rgb(210, 46, 46);
+          margin-bottom: 2rem;
+        }
         // Style the offline result
         div {
           display: flex;
@@ -112,6 +114,37 @@
             color: white;
             font-size: 2.5rem;
             margin-top: 1.2rem;
+          }
+        }
+      }
+
+      &__emotes {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+
+        h3 {
+          font-size: 3rem;
+          font-style: italic;
+          color: rgb(210, 46, 46);
+          margin-bottom: 2rem;
+          grid-column: span 4;
+        }
+
+        .emotes-container {
+          background-color: rgba(255, 255, 255, 0.057);
+          padding: 0.5rem 1.5rem;
+          border-radius: 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: 1.6rem;
+            color: white;
+            margin-top: 0.5rem;
           }
         }
       }

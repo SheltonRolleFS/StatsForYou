@@ -18,7 +18,7 @@ function App() {
   const [emotes, setEmotes] = useState([])
 
 
-  const fetchData = (channel) => {
+  const fetchData = async (channel) => {
     // Check that a channel was entered before clicking the search button, if one wasn't, display an error
     if(!channel){
 
@@ -27,7 +27,7 @@ function App() {
     }else{
       // Run a fetch to get an oauth token to access the API with
       const oauthURL = 'https://id.twitch.tv/oauth2/token?client_id=chgdyewi4tcvg7mp34uoxrjq9t6h9m&client_secret=iiy9ht38arnuh5ywfbhltmd36c8cs7&grant_type=client_credentials'
-      fetch(oauthURL, {method: 'POST'})
+      await fetch(oauthURL, {method: 'POST'})
       .then(res => res.json())
       .then(data => {
         const token = data.access_token
@@ -77,8 +77,6 @@ function App() {
             setProfileImg(data.profile_image_url)
             setOfflineImg(data.offline_image_url)
             setPartnerStatus(data.broadcaster_type)
-
-            console.log(data);
             // If the username does exist, gather the rest of the channel information ( The live status and the list of custom emotes )
 
 
@@ -138,11 +136,15 @@ function App() {
       })
     }
 
+    // Set the search input back to be empty
+    const search = document.querySelector('#channelName');
+    search.value = '';
+
   }
 
   return (
     <>
-      <div className="intro">
+      <div id="top" className="intro">
         <div className="overlay">
           <div className="container">
             <header>

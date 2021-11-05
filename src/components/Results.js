@@ -26,6 +26,7 @@ const Result = ({ name, description, profileImg, offlineImg, partnerStatus, live
                 </header>
 
                 <section className="results__live-status">
+                    <h3>Live Status</h3>
                     {liveStatus === true
                         ?
                     <div className="live-card">
@@ -41,6 +42,7 @@ const Result = ({ name, description, profileImg, offlineImg, partnerStatus, live
                 </section>
 
                 <section className="results__emotes">
+                    <h3>Channel Emotes</h3>
                     {emotes.length > 0 ? 
                     
                     emotes.map(emote => {
