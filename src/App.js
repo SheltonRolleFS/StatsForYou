@@ -164,16 +164,18 @@ function App() {
         </div>
       </div>
 
-      <section className="user-input">
-        <div className="user-input__entry">
-          <label htmlFor="channelName">Channel Name</label>
-          <input type="text" id="channelName" placeholder="Enter channel name here..." onChange={(evt) => setChannel(evt.target.value)}/>
-        </div>
-        <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
-      </section>
+      <section id="user">
+        <div className="container">
+          <section className="user-input">
+            <label htmlFor="channelName">Channel Name</label>
+            <input type="text" id="channelName" placeholder="eg. SONII" onChange={(evt) => setChannel(evt.target.value)}/>
+            <button id="search-btn" onClick={() => fetchData(channel)}>Search</button>
+          </section>
 
-      {/* Check if a user was searched for and only display the results section if one was */}
-      {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
+          {/* Check if a user was searched for and only display the results section if one was */}
+          {username !== '' ? <Result name={username} description={description} profileImg={profileImg} offlineImg={offlineImg} partnerStatus={partnerStatus} liveStatus={liveStatus} title={title} game={game} emotes={emotes} errMsg={errMsg}/> : ''}
+        </div>
+      </section>
     </>
   );
 }

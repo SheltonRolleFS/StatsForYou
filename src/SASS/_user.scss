@@ -1,0 +1,57 @@
+#user {
+  background-color: #040348;
+  height: 100vh;
+  padding: 7rem 0;
+
+  .container {
+    .user-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      label {
+        display: none;
+      }
+
+      input {
+        width: 40%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        font-size: 2rem;
+        padding: 0.5rem;
+        outline: none;
+        color: white;
+      }
+
+      input::placeholder {
+        font-size: 2rem;
+        color: $non-active;
+      }
+
+      button {
+        margin-left: 3rem;
+        font-size: 2rem;
+        padding: 1rem;
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        text-transform: uppercase;
+        color: white;
+        background: transparent;
+        transition: all 200ms ease-in;
+        cursor: pointer;
+      }
+    }
+
+    .results {
+      &__err-msg {
+        color: rgb(167, 163, 163);
+        text-align: center;
+        font-size: 2.5rem;
+        margin: 4rem;
+        font-weight: bold;
+        font-style: italic;
+      }
+    }
+  }
+}

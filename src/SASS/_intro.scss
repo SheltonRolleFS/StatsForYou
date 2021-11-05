@@ -13,9 +13,9 @@
         text-align: right;
         nav {
           a {
-            color: $no-hover;
+            color: $non-active;
             text-decoration: none;
-            border: 1px solid $no-hover;
+            border: 1px solid $non-active;
             padding: 0.5rem 1rem;
             font-size: 1.6rem;
             transition: all 200ms ease-in-out;
